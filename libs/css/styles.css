@@ -1,0 +1,140 @@
+/*//// Text Fonts (excluding icon fonts) ////*/
+@font-face {
+    font-family: "RobotoMedium";
+    src: url("webfonts/roboto-mono/static/RobotoMono-Medium.ttf");
+}
+/*//// Loader ////*/
+#prescreen {
+    position: fixed;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background-color: #222222;
+}
+#preloader {
+    border-top: 16px solid purple;
+    border-right: 16px solid green;
+    border-bottom: 16px solid orange;
+    border-left: 16px solid aqua;
+    background-color: black;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    animation: spin 3s linear infinite;
+    z-index: 9999;
+}
+#globe {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    animation: spin 3s linear infinite;
+    animation-direction: reverse;
+    padding: 5px;
+}
+@keyframes spin {
+    0% { 
+        transform: rotate(0deg);
+        animation-direction: reverse;
+    }
+    100% {
+        transform: rotate(360deg); 
+    }
+}
+/*//// Main Content ////*/
+html, body {
+    font-family: RobotoMedium, Verdana, Geneva, Tahoma, sans-serif;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-flow: column;
+    background-color: #444444;
+}
+#map { 
+    flex: 1;
+    width: 100%;
+} 
+#topnav {
+    font-size: small;
+    padding: 5px;
+    margin: 0px;
+    color: #FFFFFF;
+}
+#navTitle {
+    font-size: 22px;
+    color: white;
+    padding: 0px;
+}
+#selectCountry{
+    font-size: medium;
+}
+#mapid {
+    width: 100vw;
+}
+.attribution {
+    font-size: 10px;
+}
+.leaflet-control-attribution {
+    max-height: 15px;
+}
+
+/*//// Modal Content ////*/
+.modalImage {
+    width: 75px;
+}
+.modal-content {
+    font-family: RobotoLight, Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    background-color: #444444;
+}
+#geoTable, #weatherTable, #pandemicTable {
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+/*//// Icons ////*/
+.fa-house-damage {color: red !important;}
+.fa-city {color: white !important;}
+.fa-plane {color: black !important;}
+.fa-leaf {color: lightgreen !important;}
+.fa-building {color: black !important;}
+.fa-question {color: black !important;}
+.iconImage {width: 100%;}
+/*//// Left Panel buttons ////*/
+.easy-button-button {
+    background-color: #444444 !important;
+    color: white !important;
+}
+/*//// Right Panel Control Layers ////*/
+.leaflet-control-layers-list{
+    font-family: RobotoMedium, Verdana, Geneva, Tahoma, sans-serif;
+    /* font-weight: 900;
+    color: white; */
+    /* padding: 8px; */
+    /* margin: 0px; */
+    /* border-style: solid !important; */
+    /* border-radius: 5px !important; */
+    /* border-width: 1px !important; */
+    /* border: #444444; */
+}
+.leaflet-control-layers-expanded {
+    /* padding: 0px; */
+    /* margin: 0px; */
+    /* background-color: #444444; */
+    /* color: white; */
+}
+.leaflet-control-layers-toggle {
+    background-color: #444444;
+    border-style: solid !important;
+    border-radius: 5px;
+    border-width: 1px !important;
+    border: white;
+}

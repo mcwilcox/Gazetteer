@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+	<head>
+    <title>gazetteer</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Map, Country, Information, Gazetteer, Global, Statistics, Data">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="author" content="Matthew Wilcox">
+    <link rel="stylesheet" type="text/css" href="libs/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="libs/css/leaflet/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="libs/css/bootstrap-4.5.3/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="libs/css/easy-button/easy-button.css">
+    <link rel="stylesheet" type="text/css" href="libs/css/leaflet-marker-cluster/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="libs/css/leaflet-marker-cluster/MarkerCluster.Default.css">
+    <link rel="stylesheet" type="text/css" href="libs/css/leaflet-extra-markers/leaflet.extra-markers.min.css">
+    <link rel="stylesheet" type="text/css" href="libs/css/font-awesome/all.css"> <!--This is for fa-webfonts, consider removing if not using-->
+    <link rel="stylesheet" type="text/css" href="libs/css/styles.css">
+    <script defer src="libs/js/font-awesome/all.js"></script> <!--This is for fa SVGs -->
+  </head>
+    
+  <body>
+    <div id="prescreen">
+      <div id="preloader">
+        <img id="globe" src="libs/css/img/Globe.png" alt=""><!-- <a href="https://icon-library.net/icon/globe-icon-svg-4.html">Globe Icon Svg #399092</a> -->
+      </div>
+    </div><!-- <a href="https://www.vecteezy.com/free-vector/pointer">Pointer Vectors by Vecteezy</a> -->
+
+    <div id="topnav" class="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div class="d-flex flex-grow-1">
+        <span class="navbar-text" id="navTitle">gazetteer</span>
+      </div>
+      <div>
+        <select id="selectCountry" class="form-control form-control-sm"></select>
+      </div>
+    </div>
+
+    <div id="map"></div>
+
+    <!-- Country Social Information Modal Overlay -->
+    <div class="modal fade mediaModal" id="geoInfo" tabindex="-1" role="dialog" aria-labelledby="geoLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 id="geoTitle" class="modal-title" id="geoLabel">Geo-Social</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="geoBody" class="modal-body">
+              <table class="table-sm table-condensed table-borderless" id="geoTable">
+                <tbody>
+                    <tr><td class="lSide" style="width:40%">Full Name</td><td class="rSide" id="modalFullName"></td></tr>
+                    <tr><td class="lSide">Region</td><td class="rSide" id="modalRegion"></td></tr>
+                    <tr><td class="lSide">Sub-Region</td><td class="rSide" id="modalSubRegion"></td></tr>
+                    <tr><td class="lSide">Map Location</td><td class="rSide" id="modalMapLocation"></td></tr>
+                    <tr><td class="lSide">Numeric Code</td><td class="rSide" id="modalNumericCode"></td></tr>
+                    <tr><td class="lSide">Coverage</td><td class="rSide" id="modalCoverage"></td></tr>
+                    <tr><td class="lSide">Population</td><td class="rSide" id="modalPopulation"></td></tr>
+                    <tr><td class="lSide">Population Density</td><td class="rSide" id="modalPopulationDensity"></td></tr>
+                    <tr><td class="lSide">Capital City</td><td class="rSide" id="modalCapitalCity"></td></tr>
+                    <tr><td class="lSide">Languages</td><td class="rSide" id="modalLanguages"></td></tr>
+                    <tr><td class="lSide">Income Level</td><td class="rSide" id="modalIncomeLevel"></td></tr>
+                    <tr><td class="lSide">Currencies</td><td class="rSide" id="modalCurrencies"></td></tr>
+                    <tr><td class="lSide">Calling Code</td><td class="rSide" id="modalCallingCode"></td></tr>
+                    <tr><td class="lSide">Top-Level Domain</td><td class="rSide" id="modalTopLevelDomain"></td></tr>
+                </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Country Weather Information Modal Overlay -->
+    <div class="modal fade" id="weatherInfo" tabindex="-1" role="dialog" aria-labelledby="weatherLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 id="weatherTitle" class="modal-title" id="weatherLabel">Weather</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div id="weatherBody" class="modal-body">
+              <table class="table-sm table-condensed table-borderless" id="weatherTable">
+                <tbody>
+                    <tr><td class="lSide" style="width:50%">Weather Station Location</td><td class="rSide" id="modalWeatherStation"></td></tr>
+                    <tr><td class="lSide">Weather Description</td><td class="rSide" id="modalWeatherDescription"></td></tr>
+                    <tr><td class="lSide">Cloudiness</td><td class="rSide" id="modalCloudiness"></td></tr>
+                    <tr><td class="lSide">Rainfall (mm in 1 hour)</td><td class="rSide" id="modalRainMM"></td></tr>
+                    <tr><td class="lSide">Temperature</td><td class="rSide" id="modalTemperature"></td></tr>
+                    <tr><td class="lSide">Temperature High/Low</td><td class="rSide" id="modalTemperatureHighLow"></td></tr>
+                    <tr><td class="lSide">Temperature Feels Like</td><td class="rSide" id="modalTemperatureFeelsLike"></td></tr>
+                    <tr><td class="lSide">Humidity</td><td class="rSide" id="modalHumidity"></td></tr>
+                    <tr><td class="lSide">Pressure</td><td class="rSide" id="modalPressure"></td></tr>
+                    <tr><td class="lSide">Wind Direction</td><td class="rSide" id="modalWindDirection"></td></tr>
+                    <tr><td class="lSide">Wind Speed</td><td class="rSide" id="modalWindSpeed"></td></tr>
+                    <tr><td class="lSide">Wind Gust</td><td class="rSide" id="modalWindGust"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Country Pandemic Information Modal Overlay -->
+    <div class="modal fade" id="pandemicInfo" tabindex="-1" role="dialog" aria-labelledby="pandemicLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 id="pandemicTitle" class="modal-title" id="pandemicLabel">COVID-19</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div id="pandemicBody" class="modal-body">
+              <table class="table-sm table-condensed table-borderless" id="pandemicTable">
+                <tbody>
+                  <tr><td class="lSide" style="width:70%">Confirmed Cases</td><td class="rSide" id="modalConfirmed"></td></tr>
+                  <tr><td class="lSide">Current Critical</td><td class="rSide" id="modalCritical"></td></tr>
+                  <tr><td class="lSide">Recoveries</td><td class="rSide" id="modalRecoveries"></td></tr>
+                  <tr><td class="lSide">Fatalities</td><td class="rSide" id="modalDeaths"></td></tr>
+                  <tr><td class="lSide">Recovery Rate</td><td class="rSide" id="modalRecoveryRate"></td></tr>
+                  <tr><td class="lSide">Mortality Rate</td><td class="rSide" id="modalMortalityRate"></td></tr>
+                  <tr><td class="lSide">Pending Rate</td><td class="rSide" id="modalPendingUnknown"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="application/javascript" src="libs/js/jquery/jquery-2.2.3.min.js"></script>
+    <script type="application/javascript" src="libs/js/leaflet/leaflet.js"
+              integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+              crossorigin="">    
+    </script>
+    <script type="application/javascript" src="libs/js/leaflet-easy-button/easy-button.js"></script>
+    <script type="application/javascript" src="libs/js/leaflet-extra-marker/leaflet.extra-markers.js"></script>
+    <script type="application/javascript" src="libs/js/leaflet-marker-cluster/leaflet.markercluster.js"></script>
+    <script type="application/javascript" src="libs/js/leaflet-marker-cluster/leaflet.markercluster.layersupport-src.js"></script>
+    <script type="application/javascript" src="libs/js/script.js"></script>
+    <script type="application/javascript" src="libs/js/bootstrap-4.5.3/bootstrap.js"></script>
+  </body>
+</html>
+
+    <!-- <div class="modal fade mediaModal" id="geoInfo" tabindex="-1" role="dialog" aria-labelledby="geoLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 id="geoTitle" class="modal-title" id="geoLabel">Geo-Social</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="geoBody" class="modal-body">
+            <span><b>Full Name: </b></span><span id="modalFullName"></span><br>
+            <span><b>Region: </b></span><span id="modalRegion"></span><br>
+            <span><b>Sub-Region: </b></span><span id="modalSubRegion"></span><br>
+            <span><b>Map Location: </b></span><span id="modalMapLocation"></span><br>
+            <span><b>Numeric Code: </b></span><span id="modalNumericCode"></span><br>
+            <span><b>Coverage: </b></span><span id="modalCoverage"></span><br>
+            <span><b>Population: </b></span><span id="modalPopulation"></span><br>
+            <span><b>Population Density: </b></span><span id="modalPopulationDensity"></span><br>
+            <span><b>Capital City: </b></span><span id="modalCapitalCity"></span><br>
+            <span><b>Languages: </b></span><span id="modalLanguages"></span><br>
+            <span><b>Income Level: </b></span><span id="modalIncomeLevel"></span><br>
+            <span><b>Currencies: </b></span><span id="modalCurrencies"></span><br>
+            <span><b>Calling Code: </b></span><span id="modalCallingCode"></span><br>
+            <span><b>Top Level Domain: </b></span><span id="modalTopLevelDomain"></span><br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
