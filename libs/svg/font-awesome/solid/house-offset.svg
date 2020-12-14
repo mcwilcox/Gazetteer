@@ -1,0 +1,18 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" height="602" width="802" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
+  <g stroke="null" id="svg_5">
+   <path stroke="null" id="svg_4" d="m399.07921,14.41491l-22.22825,18.30753l0,19.75911a1.92901,1.92901 0 0 0 1.92901,1.92901l13.51032,-0.03496a1.92901,1.92901 0 0 0 1.91937,-1.92901l0,-11.53911a1.92901,1.92901 0 0 1 1.92901,-1.92901l7.71605,0a1.92901,1.92901 0 0 1 1.92901,1.92901l0,11.53067a1.92901,1.92901 0 0 0 1.92901,1.93504l13.5055,0.03737a1.92901,1.92901 0 0 0 1.92901,-1.92901l0,-19.77238l-22.22343,-18.29427a1.46967,1.46967 0 0 0 -1.84462,0zm35.11164,12.44333l-10.07909,-8.30801l0,-16.69922a1.44676,1.44676 0 0 0 -1.44676,-1.44676l-6.75154,0a1.44676,1.44676 0 0 0 -1.44676,1.44676l0,8.7541l-10.79403,-8.88069a5.78704,5.78704 0 0 0 -7.35436,0l-30.51818,25.13382a1.44676,1.44676 0 0 0 -0.1929,2.03752l3.07436,3.73746a1.44676,1.44676 0 0 0 2.03872,0.19652l28.35889,-23.35793a1.46967,1.46967 0 0 1 1.84462,0l28.3601,23.35793a1.44676,1.44676 0 0 0 2.03752,-0.1929l3.07436,-3.73746a1.44676,1.44676 0 0 0 -0.20496,-2.04114z"/>
+  </g>
+ </g>
+</svg>
